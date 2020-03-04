@@ -1,0 +1,24 @@
+<mat-form-field>
+    <mat-label>Your guess</mat-label>
+      <input type=number matInput [(ngModel)]="guess" min="1" max="100">
+    <button mat-button *ngIf="guess" matSuffix mat-icon-button aria-label="Clear" (click)="guess=''">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+  <br/>
+  <p *ngIf="amountOfGuesses > 0">
+    <ng-container *ngIf="previousGuessCorrect; then correctGuess else incorrectGuess"></ng-container>
+  </p>
+    <button mat-raised-button (click)="makeGuess()" [disabled]="guess < 1 || guess > 100">
+      Guess
+    </button>
+<ng-template #correctGuess>You have guessed the number ({{hiddenNumber}}) correctly! You win!</ng-template>
+<ng-template #incorrectGuess>
+    <p *ngIf="previousGuessHigher" >
+        The number is higher than {{previousGuess}}.
+      </p>
+      <p *ngIf="!previousGuessHigher">
+        The number is lower than {{previousGuess}}.
+      </p>
+</ng-template>
+

@@ -1,14 +1,14 @@
-<mat-expansion-panel>
+<mat-expansion-panel [expanded]="true">
   <mat-expansion-panel-header>
     <mat-panel-title>
       Number Game
     </mat-panel-title>
-    <mat-panel-description>
+    <!-- <mat-panel-description>
       Play - Guess the number!
-    </mat-panel-description>
+    </mat-panel-description> -->
   </mat-expansion-panel-header>
 
-  <p>This is the primary content of the panel.</p>
+  <app-numbergame></app-numbergame>
 
 </mat-expansion-panel>
 <mat-expansion-panel>
@@ -16,11 +16,9 @@
     <mat-panel-title>
       Number Game Rules
     </mat-panel-title>
-    <mat-panel-description>
+    <!-- <mat-panel-description>
       Learn - The rules of the number game
-    </mat-panel-description>
+    </mat-panel-description> -->
   </mat-expansion-panel-header>
-
-  <p>This is the primary content of the panel.</p>
-
+  <app-numbergamerules></app-numbergamerules>
 </mat-expansion-panel>
