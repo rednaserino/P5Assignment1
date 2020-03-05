@@ -50,10 +50,11 @@ export class NumbergameComponent implements OnInit {
 
   resetGame(){
     this.amountOfGuesses = 0;
+    this.generateHiddenNumber();
     this.counterService.stop();
   }
 
   generateHiddenNumber(){
-    this.hiddenNumber = 36;
+    this.hiddenNumber = Math.floor(Math.random() * 100) + 1;
   }
 }

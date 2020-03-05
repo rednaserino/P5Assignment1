@@ -19,15 +19,12 @@
     <button mat-raised-button (click)="makeGuess()" [disabled]="guess === null || guess < 1 || guess > 100">
       Guess
     </button>
-<ng-template #correctGuess>You have guessed the number ({{hiddenNumber}}) correctly! You win!</ng-template>
-<ng-template #incorrectGuess *ngIf="amountOfGuesses > 0">
-    <p *ngIf="previousGuessHigher" >
+<ng-template #correctGuess>You have guessed the number ({{previousGuess}}) correctly! You win!</ng-template>
+<ng-template #incorrectGuess >
+    <p *ngIf="previousGuessHigher && amountOfGuesses>0" >
         The number is higher than {{previousGuess}}.
       </p>
-      <p *ngIf="!previousGuessHigher">
+      <p *ngIf="!previousGuessHigher && amountOfGuesses>0">
         The number is lower than {{previousGuess}}.
       </p>
 </ng-template>
-
-number: 
-{{hiddenNumber}}
