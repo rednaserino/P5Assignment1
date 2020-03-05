@@ -1,19 +1,26 @@
+<p>
+  Guess the number between 1 - 100. <br/>
+  Guesses remaining: {{10 - amountOfGuesses}} <br/>
+  <span *ngIf="counterService.toggleCounter$ | async">
+    Time remaining: {{counterService.remainingSeconds$ | async}}
+  </span>
+</p>
 <mat-form-field>
     <mat-label>Your guess</mat-label>
-      <input type=number matInput [(ngModel)]="guess" min="1" max="100">
+      <input type=number matInput [(ngModel)]="guess" (keydown.enter)="makeGuess()" min="1" max="100">
     <button mat-button *ngIf="guess" matSuffix mat-icon-button aria-label="Clear" (click)="guess=''">
       <mat-icon>close</mat-icon>
     </button>
   </mat-form-field>
   <br/>
-  <p *ngIf="amountOfGuesses > 0">
+  <p>
     <ng-container *ngIf="previousGuessCorrect; then correctGuess else incorrectGuess"></ng-container>
   </p>
-    <button mat-raised-button (click)="makeGuess()" [disabled]="guess < 1 || guess > 100">
+    <button mat-raised-button (click)="makeGuess()" [disabled]="guess === null || guess < 1 || guess > 100">
       Guess
     </button>
 <ng-template #correctGuess>You have guessed the number ({{hiddenNumber}}) correctly! You win!</ng-template>
-<ng-template #incorrectGuess>
+<ng-template #incorrectGuess *ngIf="amountOfGuesses > 0">
     <p *ngIf="previousGuessHigher" >
         The number is higher than {{previousGuess}}.
       </p>
@@ -22,3 +29,5 @@
       </p>
 </ng-template>
 
+number: 
+{{hiddenNumber}}
