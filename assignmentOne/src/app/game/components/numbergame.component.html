@@ -43,8 +43,12 @@
 </ng-container>
 
 <ng-template #losingConditions>
-  <p *ngIf="ranOutOfTime">You ran out of time!</p>
-  <p *ngIf="amountOfGuesses > 9">You ran out of guesses!</p>
+  <button mat-button *ngIf="ranOutOfTime" (click)="resetgame()">
+    You ran out of time!
+  </button>
+  <button mat-button *ngIf="amountOfGuesses > 9" (click)="resetgame()">
+    You ran out of guesses!
+  </button>
 </ng-template>
 <ng-template #correctGuess
   >You have guessed the number ({{ previousGuess }}) correctly! You
