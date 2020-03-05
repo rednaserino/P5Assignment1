@@ -30,6 +30,7 @@ export class NumbergameComponent implements OnInit {
     }
     if(this.amountOfGuesses === 0){
       this.counterService.start();
+      this.previousGuessCorrect=false;
     }
 
     this.previousGuess = this.guess;

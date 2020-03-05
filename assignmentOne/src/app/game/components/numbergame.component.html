@@ -19,6 +19,10 @@
     <button mat-raised-button (click)="makeGuess()" [disabled]="guess === null || guess < 1 || guess > 100">
       Guess
     </button>
+<ng-template #losingConditions>
+  <p *ngIf="counterService.remainingSeconds$ < 0">You ran out of time!</p>
+  <ng-template #outOfGuesses>You ran out of guesses!</ng-template>
+</ng-template>
 <ng-template #correctGuess>You have guessed the number ({{previousGuess}}) correctly! You win!</ng-template>
 <ng-template #incorrectGuess >
     <p *ngIf="previousGuessHigher && amountOfGuesses>0" >
