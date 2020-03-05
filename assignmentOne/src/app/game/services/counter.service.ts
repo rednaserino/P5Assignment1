@@ -6,7 +6,7 @@ import { switchMap, map, takeWhile } from "rxjs/operators";
   providedIn: "root"
 })
 export class CounterService {
-  initialValue = 10;
+  initialValue = 100;
   toggleCounter$ = new BehaviorSubject(false);
   toRemainder = (t: number) => this.initialValue - t;
 
