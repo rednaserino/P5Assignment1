@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
-import { observable, BehaviorSubject, timer, NEVER } from 'rxjs';
-import { switchMap, map, takeWhile } from 'rxjs/operators'; 
+import { Injectable } from "@angular/core";
+import { observable, BehaviorSubject, timer, NEVER } from "rxjs";
+import { switchMap, map, takeWhile } from "rxjs/operators";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class CounterService {
   initialValue = 100;
@@ -13,13 +13,13 @@ export class CounterService {
   remainingSeconds$ = this.toggleCounter$.pipe(
     switchMap((running: boolean) => (running ? timer(0, 1000) : NEVER)),
     map(this.toRemainder),
-    takeWhile(t => t >= 0),
+    takeWhile(t => t >= 0)
   );
 
-  start(){
+  start() {
     this.toggleCounter$.next(true);
   }
-  stop(){
+  stop() {
     this.toggleCounter$.next(false);
   }
 }

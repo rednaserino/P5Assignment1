@@ -1,34 +1,64 @@
-<p>
-  Guess the number between 1 - 100. <br/>
-  Guesses remaining: {{10 - amountOfGuesses}} <br/>
-  <span *ngIf="counterService.toggleCounter$ | async">
-    Time remaining: {{counterService.remainingSeconds$ | async}}
-  </span>
-</p>
-<mat-form-field>
+<ng-container *ngIf="!lost; else losingConditions">
+  <p>
+    Guess the number between 1 - 100. <br />
+    Guesses remaining: {{ 10 - amountOfGuesses }} <br />
+    <span *ngIf="counterService.toggleCounter$ | async">
+      Time remaining: {{ counterService.remainingSeconds$ | async }}
+    </span>
+  </p>
+  <mat-form-field>
     <mat-label>Your guess</mat-label>
-      <input type=number matInput [(ngModel)]="guess" (keydown.enter)="makeGuess()" min="1" max="100">
-    <button mat-button *ngIf="guess" matSuffix mat-icon-button aria-label="Clear" (click)="guess=''">
+    <input
+      type="number"
+      matInput
+      [(ngModel)]="guess"
+      (keydown.enter)="makeGuess()"
+      min="1"
+      max="100"
+    />
+    <button
+      mat-button
+      *ngIf="guess"
+      matSuffix
+      mat-icon-button
+      aria-label="Clear"
+      (click)="guess = ''"
+    >
       <mat-icon>close</mat-icon>
     </button>
   </mat-form-field>
-  <br/>
+  <br />
   <p>
-    <ng-container *ngIf="previousGuessCorrect; then correctGuess else incorrectGuess"></ng-container>
+    <ng-container
+      *ngIf="previousGuessCorrect; then correctGuess; else incorrectGuess"
+    ></ng-container>
   </p>
-    <button mat-raised-button (click)="makeGuess()" [disabled]="guess === null || guess < 1 || guess > 100">
-      Guess
-    </button>
+  <button
+    mat-raised-button
+    (click)="makeGuess()"
+    [disabled]="guess === null || guess < 1 || guess > 100"
+  >
+    Guess
+  </button>
+</ng-container>
+
 <ng-template #losingConditions>
-  <p *ngIf="counterService.remainingSeconds$ < 0">You ran out of time!</p>
-  <ng-template #outOfGuesses>You ran out of guesses!</ng-template>
+  <button mat-button *ngIf="ranOutOfTime" (click)="resetgame()">
+    You ran out of time!
+  </button>
+  <button mat-button *ngIf="amountOfGuesses > 9" (click)="resetgame()">
+    You ran out of guesses!
+  </button>
 </ng-template>
-<ng-template #correctGuess>You have guessed the number ({{previousGuess}}) correctly! You win!</ng-template>
-<ng-template #incorrectGuess >
-    <p *ngIf="previousGuessHigher && amountOfGuesses>0" >
-        The number is higher than {{previousGuess}}.
-      </p>
-      <p *ngIf="!previousGuessHigher && amountOfGuesses>0">
-        The number is lower than {{previousGuess}}.
-      </p>
+<ng-template #correctGuess
+  >You have guessed the number ({{ previousGuess }}) correctly! You
+  win!</ng-template
+>
+<ng-template #incorrectGuess>
+  <p *ngIf="previousGuessHigher && amountOfGuesses > 0">
+    The number is higher than {{ previousGuess }}.
+  </p>
+  <p *ngIf="!previousGuessHigher && amountOfGuesses > 0">
+    The number is lower than {{ previousGuess }}.
+  </p>
 </ng-template>
