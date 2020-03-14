@@ -18,7 +18,7 @@ export class NumbergameComponent implements OnInit {
     return this.guess === null || this.guess < 1 || this.guess > 100
   }  
     
-  constructor(private counterService: CounterService) { }
+  constructor(public counterService: CounterService) { }
 
   ngOnInit() {
     this.generateHiddenNumber();
